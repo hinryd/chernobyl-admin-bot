@@ -5,8 +5,13 @@ micros:
     src: ./
     engine: nodejs16
     primary: true
+    public: true
     commands:
       - npm run build
     include:
       - dist
     run: node dist/main.js
+    presets:
+      env:
+        - name: BOT_TOKEN
+          description: Telegram bot token

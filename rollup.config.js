@@ -1,11 +1,9 @@
-// rollup.config.js
-import "dotenv/config";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
-import typescript from "@rollup/plugin-typescript";
-import terser from "@rollup/plugin-terser";
-import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
+import commonjs from "@rollup/plugin-commonjs";
+import swc from "@rollup/plugin-swc";
 import { defineConfig } from "rollup";
+import terser from "@rollup/plugin-terser";
 
 export default defineConfig({
   input: "src/main.ts",
@@ -16,12 +14,11 @@ export default defineConfig({
   plugins: [
     nodeResolve({
       preferBuiltins: true,
+      extensions: [".mjs", ".js", ".json", ".node", ".ts"],
     }),
-    commonjs(),
     json(),
-    typescript({
-      module: "ESNext",
-    }),
-    terser(),
+    commonjs(),
+    swc(),
+    // terser(),
   ],
 });
